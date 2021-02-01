@@ -104,7 +104,7 @@ static int minimax(char board[][],
 					board[i][j] = player; 
 
 					best = Math.max(best, minimax(board, 
-									depth + 1, !isMax)); 
+									depth + 1, isMax)); 
 
 					board[i][j] = '_'; 
 				} 
@@ -125,7 +125,7 @@ static int minimax(char board[][],
 				{ 
 					board[i][j] = opponent; 
 					best = Math.min(best, minimax(board, 
-									depth + 1, !isMax)); 
+									depth + 1, isMax)); 
 					board[i][j] = '_'; 
 				} 
 			} 
@@ -149,7 +149,7 @@ static Move findBestMove(char board[][])
 			{ 
 				board[i][j] = player; 
 
-				int moveVal = minimax(board, 0, false); 
+				int moveVal = minimax(board, 1, false); 
 
 				board[i][j] = '_'; 
 
