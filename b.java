@@ -110,19 +110,19 @@ public class b extends IOException{
                         Graphics g = frame.getGraphics();
                         paintComponent(g);
                         draw = false;
-                        paintcounter = 19;
+                        paintcounter = 23;
                         paintComponent(g);
                         test ifWon = new test(gameBoard);
                         System.out.println(ifWon.checkIfWon());
-                        String a = "00";
-                            if (a.equals("00")) {
+                        String a = "11";
+                            if (a.equals("11")) {
                                 System.out.println(a);
-                                frame.remove(button11);
-                                gameBoard[0] = "O";
+                                frame.remove(button7);
+                                gameBoard[4] = "O";
                                 for (String game : gameBoard) {
                                     System.out.println(game);
                                 }
-                                q7 addition2 = new q7(1, 0); 
+                                q7 addition2 = new q7(5, 0); 
                                 try {
                                     String a2 = addition2.getDivisionAnswer();
                                 } catch (IOException e1) {
@@ -1208,7 +1208,8 @@ public class b extends IOException{
                             System.out.println(ifWon.checkIfWon());
                             String paintcounter1 = (ifWon.checkIfWon().split(" ", 4)[3]);
                             paintcounter = Integer.parseInt(paintcounter1);  
-                            paintComponent(g);   
+                            paintComponent(g);
+                            someoneWon = 1;   
                         }
                         q7 addition = new q7(position, 1); 
                         try {
@@ -1783,6 +1784,7 @@ public class b extends IOException{
                     g.setColor(Color.BLUE);
                     for (int i = 0; i < 8; i++) {
                         g.drawOval(160,408,140 - i,140 - i);
+                        System.out.println("here");
                     }
                 }
                 if (paintcounter == 26) {
