@@ -15,7 +15,7 @@ class q7
     }
     static class Move 
     { 
-        int row, col; 
+        int row, col, val;
     }; 
 
 static char player = 'x', opponent = 'o'; 
@@ -104,7 +104,7 @@ static int minimax(char board[][],
 					board[i][j] = player; 
 
 					best = Math.max(best, minimax(board, 
-									depth + 1, isMax)); 
+									depth + 1, !isMax)); 
 
 					board[i][j] = '_'; 
 				} 
@@ -125,7 +125,7 @@ static int minimax(char board[][],
 				{ 
 					board[i][j] = opponent; 
 					best = Math.min(best, minimax(board, 
-									depth + 1, isMax)); 
+									depth + 1, !isMax)); 
 					board[i][j] = '_'; 
 				} 
 			} 
@@ -134,12 +134,12 @@ static int minimax(char board[][],
 	} 
 } 
 
-static Move findBestMove(char board[][]) 
+static Move findBestMove(char board[][], boolean ifMax) 
 { 
-	int bestVal = -1000; 
 	Move bestMove = new Move(); 
 	bestMove.row = -1; 
-	bestMove.col = -1; 
+	bestMove.col = -1;
+	bestMove.val = -1000;
 
 	for (int i = 0; i < 3; i++) 
 	{ 
@@ -149,23 +149,23 @@ static Move findBestMove(char board[][])
 			{ 
 				board[i][j] = player; 
 
-				int moveVal = minimax(board, 1, false); 
+				int moveVal = minimax(board, 1, ifMax); 
 
 				board[i][j] = '_'; 
 
 
-				if (moveVal > bestVal) 
+				if (moveVal > bestMove.val) 
 				{ 
 					bestMove.row = i; 
 					bestMove.col = j; 
-					bestVal = moveVal; 
+					bestMove.val = moveVal; 
 				} 
 			} 
 		} 
 	} 
 
 	System.out.printf("The value of the best Move " + 
-							"is : %d\n\n", bestVal); 
+							"is : %d\n\n", bestMove.val); 
 
 	return bestMove; 
 } 
@@ -243,11 +243,16 @@ public String getDivisionAnswer() throws IOException
     char board[][] = {{num[0], num[1], num[2] }, 
                      { num[3], num[4], num[5] }, 
                      { num[6], num[7], num[8] }}; 
-	Move bestMove = findBestMove(board); 
+	Move bestMove = findBestMove(board, true); 
+	Move bestMove2 = findBestMove(board, false); 
+	int a1 = bestMove2.row; 
+	int b1 = bestMove2.col;
 	int a = bestMove.row; 
 	int b = bestMove.col;
 	String f = String.valueOf(a);
 	String g = String.valueOf(b);
+	String f1 = String.valueOf(a1);
+	String g1 = String.valueOf(b1);
 	String sf2 = String.format("value is %c %c %c %c %c %c %c %c %c %s", num[0], num[1], num[2], num[3], num[4], num[5], num[6]
 																	,num[7], num[8],
 																	con);
@@ -256,7 +261,14 @@ public String getDivisionAnswer() throws IOException
     writer.write(sf3);
 	writer.write("\n");
 	writer.close();	
-	return f+g;
+	if (bestMove.val > bestMove2.val) {
+		System.out.println(f+g);
+		return f+g;
+	}
+	else {
+		System.out.println(f1+g1);
+		return f1+g1;
+	}
 	// returns the row and column the CPU wants to move to.
 } 
 
