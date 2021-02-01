@@ -101,9 +101,6 @@ public class b extends IOException{
                     frame.getContentPane().setBackground(Color.decode("#5DADE2"));
                 }
                 draw = true;
-                Graphics g = frame.getGraphics();
-                paintComponent(g);
-                paintComponent(g);
                 JButton button6 = new JButton("Generate Board");
                 button6.setBounds(0, 0, 140, 30);
                 button6.addActionListener(new ActionListener() {
@@ -112,6 +109,26 @@ public class b extends IOException{
                         draw = true;
                         Graphics g = frame.getGraphics();
                         paintComponent(g);
+                        draw = false;
+                        paintcounter = 19;
+                        paintComponent(g);
+                        test ifWon = new test(gameBoard);
+                        System.out.println(ifWon.checkIfWon());
+                        String a = "00";
+                            if (a.equals("00")) {
+                                System.out.println(a);
+                                frame.remove(button11);
+                                gameBoard[0] = "O";
+                                for (String game : gameBoard) {
+                                    System.out.println(game);
+                                }
+                                q7 addition2 = new q7(1, 0); 
+                                try {
+                                    String a2 = addition2.getDivisionAnswer();
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
                     }
                 });
                 button7.setBounds(300, 227, 142, 142);
